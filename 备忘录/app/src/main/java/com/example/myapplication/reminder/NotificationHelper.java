@@ -1,0 +1,68 @@
+package com.example.myapplication.reminder;
+
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
+
+import androidx.core.app.NotificationCompat;
+
+import com.example.myapplication.R;
+import com.example.myapplication.ui.MemoActivity;
+
+/**
+ * 任务提醒通知（成员 B：本地 Notification）。
+ */
+public final class NotificationHelper {
+
+    public static final String CHANNEL_ID = "task_reminders";
+    private static final String CHANNEL_NAME = "任务提醒";
+    private static final String CHANNEL_DESC = "任务截止与计划提醒通知";
+
+    private NotificationHelper() {
+    }
+
+    public static void ensureChannel(Context context) {
+        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (manager == null) {
+            return;
+        }
+        NotificationChannel channel = new NotificationChannel(
+                CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
+        channel.setDescription(CHANNEL_DESC);
+        manager.createNotificationChannel(channel);
+    }
+
+    public static boolean isGranted(Context context) {
+        if (Build.VERSION.SDK_INT < 33) {
+            return true;
+        }
+        return context.checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS)
+                == android.content.pm.PackageManager.PERMISSION_GRANTED;
+    }
+
+    public static void showTaskReminder(Context context, long taskId, String taskName) {
+        ensureChannel(context);
+        Intent open = new Intent(context, MemoActivity.class);
+        open.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent contentIntent = PendingIntent.getActivity(
+                context, (int) taskId, open,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_bell)
+                .setContentTitle(taskName)
+                .setContentText("到时间啦，别忘了完成它")
+                .setAutoCancel(true)
+                .setContentIntent(contentIntent)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setColor(0xFF2E9E63);
+
+        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (manager != null) {
+            manager.notify((int) taskId, builder.build());
+        }
+    }
+}
