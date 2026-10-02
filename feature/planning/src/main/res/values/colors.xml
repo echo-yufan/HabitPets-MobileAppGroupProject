@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- 牧场备忘录色板（复刻 HTML 原型） -->
+    <color name="bg_page">#F8F7EE</color>
+    <color name="topbar_title">#314A37</color>
+    <color name="topbar_action">#536F55</color>
+    <color name="pill_text">#5E815B</color>
+
+    <color name="overview_title">#334B38</color>
+    <color name="overview_sub">#849082</color>
+    <color name="count_text">#67806A</color>
+    <color name="count_bg">#E9F0E4</color>
+
+    <color name="tab_off_bg">#ECEFE7</color>
+    <color name="tab_off_text">#788678</color>
+    <color name="tab_on_bg">#638B66</color>
+    <color name="label_text">#889487</color>
+
+    <color name="card_bg">#FFFDF8</color>
+    <color name="card_stroke">#E9EBDF</color>
+    <color name="task_title">#354437</color>
+    <color name="task_title_done">#A3ACA1</color>
+    <color name="task_meta">#99A098</color>
+    <color name="tag_text">#739369</color>
+    <color name="tag_bg">#EDF4E7</color>
+    <color name="tag_done_text">#A3ACA1</color>
+    <color name="tag_done_bg">#F1F2EF</color>
+    <color name="check_on">#7CA77A</color>
+    <color name="check_border">#B6C8AD</color>
+    <color name="delete_icon">#ADB7A9</color>
+    <color name="empty_text">#9AA895</color>
+
+    <color name="btn_add_bg">#628A62</color>
+    <color name="sheet_title">#354C37</color>
+    <color name="sheet_desc">#8C9B89</color>
+    <color name="input_bg">#F9FBF6</color>
+    <color name="input_stroke">#DFE8D8</color>
+    <color name="input_hint">#A6B3A4</color>
+    <color name="ai_btn_bg">#E8F1E4</color>
+    <color name="ai_btn_text">#5F8060</color>
+    <color name="suggest_bg">#F0F5EB</color>
+    <color name="suggest_text">#547555</color>
+    <color name="suggest_title">#456D49</color>
+    <color name="option_bg">#F5F7F1</color>
+    <color name="option_text">#4E6750</color>
+    <color name="danger_bg">#FFF1EB</color>
+    <color name="danger_text">#B46B51</color>
+    <color name="handle_color">#D4DCCF</color>
+
+    <color name="hero_green_start">#2B5335</color>
+    <color name="hero_green_end">#32563A</color>
+</resources>

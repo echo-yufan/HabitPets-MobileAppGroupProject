@@ -1,0 +1,84 @@
+<resources>
+
+
+    <!-- 顶栏 -->
+    <string name="memo_title">备忘录</string>
+    <string name="clear">清空</string>
+
+    <!-- Banner -->
+    <string name="hero_eyebrow">PASTURE NOTES</string>
+    <string name="hero_title">把今天的小事\n好好记下来</string>
+    <string name="hero_sub">照顾小牛，也照顾每一天</string>
+    <string name="hero_pill">今日计划</string>
+
+    <!-- 概览与筛选 -->
+    <string name="overview_title">我的待办</string>
+    <string name="overview_sub">一步一步，完成今天的小目标</string>
+    <string name="filter_all">全部</string>
+    <string name="filter_todo">待完成</string>
+    <string name="filter_done">已完成</string>
+    <string name="count_format">%1$d 件待完成</string>
+    <string name="section_all">全部任务</string>
+    <string name="section_todo">待完成任务</string>
+    <string name="section_done">已完成任务</string>
+
+    <!-- 任务卡片 -->
+    <string name="tag_todo">待完成</string>
+    <string name="tag_done">已完成</string>
+    <string name="tag_ai">AI 拆解</string>
+    <string name="meta_just_now">刚刚添加</string>
+    <string name="meta_just_done">刚刚完成</string>
+    <string name="meta_yesterday_done">昨天完成</string>
+    <string name="meta_done_suffix">完成</string>
+    <string name="meta_today">今天</string>
+    <string name="empty_text">这里还没有任务，添加一件小事吧</string>
+
+    <!-- 新增备忘抽屉 -->
+    <string name="add_memo">新增备忘</string>
+    <string name="add_sheet_title">新增备忘</string>
+    <string name="add_sheet_desc">写下任务，或让 AI 帮你拆成更容易完成的小步骤。</string>
+    <string name="add_sheet_hint">例如：为小牛准备这一周的食物…</string>
+    <string name="btn_direct_add">直接添加</string>
+    <string name="btn_ai_breakdown">AI 拆解</string>
+    <string name="suggest_title">AI 拆解建议</string>
+    <string name="btn_join_todo">加入待办</string>
+    <string name="toast_added">已添加</string>
+    <string name="toast_added_n">已添加 %1$d 个任务</string>
+
+    <!-- 清空抽屉 -->
+    <string name="clear_sheet_title">清空备忘</string>
+    <string name="clear_sheet_desc">选择清理范围，操作后当前列表会立即更新。</string>
+    <string name="clear_done_option">只清除已完成</string>
+    <string name="clear_all_option">清空全部备忘</string>
+    <string name="chevron_right">›</string>
+
+    <!-- 编辑抽屉（长按任务） -->
+    <string name="edit_sheet_title">编辑任务</string>
+    <string name="edit_sheet_desc">修改名称、截止日期或提醒时间。</string>
+    <string name="hint_task_name">任务名称</string>
+    <string name="label_deadline">截止日期</string>
+    <string name="pick_date">选择日期</string>
+    <string name="clear_date">清除</string>
+    <string name="label_remind_me">提醒我</string>
+    <string name="pick_time">设置时间</string>
+    <string name="reminder_not_set">提醒时间：未设置</string>
+    <string name="reminder_set_format">提醒时间：%1$s</string>
+    <string name="btn_save">保存</string>
+    <string name="error_empty_name">请输入任务名称</string>
+    <string name="error_no_notification">未授权通知权限，提醒可能无法弹出</string>
+    <string name="ai_breakdown_loading">拆解中…</string>
+
+    <!-- 无障碍描述 -->
+    <string name="cd_back">返回</string>
+    <string name="cd_add">新增备忘</string>
+    <string name="cd_delete_task">删除任务</string>
+    <string name="cd_empty">暂无任务插图</string>
+    <string name="cd_hero">牧场横幅插图</string>
+    <string name="cd_leaf">叶子图标</string>
+    <string name="memo_processing">正在处理…</string>
+    <string name="pick_reminder_date_time">选择日期和时间</string>
+    <string name="reminder_date_title">选择提醒日期</string>
+    <string name="reminder_time_title">选择提醒时间</string>
+    <string name="error_reminder_past">请选择未来的提醒时间</string>
+    <string name="reminder_expired_format">提醒时间已过去：%1$s，请重新选择</string>
+</resources>

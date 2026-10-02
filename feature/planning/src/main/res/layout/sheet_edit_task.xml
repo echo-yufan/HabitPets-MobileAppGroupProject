@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_sheet"
+    android:orientation="vertical"
+    android:paddingStart="22dp"
+    android:paddingTop="13dp"
+    android:paddingEnd="22dp"
+    android:paddingBottom="30dp">
+
+    <View
+        android:layout_width="39dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/bg_handle" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_sheet_title"
+        android:textColor="@color/sheet_title"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:text="@string/edit_sheet_desc"
+        android:textColor="@color/sheet_desc"
+        android:textSize="12sp" />
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/bg_input"
+        android:hint="@string/hint_task_name"
+        android:inputType="text"
+        android:maxLines="1"
+        android:padding="14dp"
+        android:textColor="@color/task_title"
+        android:textColorHint="@color/input_hint"
+        android:textSize="15sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/label_deadline"
+            android:textColor="@color/task_title"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/btn_deadline"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:background="@drawable/bg_ai_btn"
+            android:gravity="center"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:text="@string/pick_date"
+            android:textColor="@color/ai_btn_text"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/btn_deadline_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:padding="4dp"
+            android:text="@string/clear_date"
+            android:textColor="@color/ai_btn_text"
+            android:textSize="13sp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.google.android.material.materialswitch.MaterialSwitch
+            android:id="@+id/sw_reminder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/label_remind_me"
+            android:textColor="@color/task_title"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/btn_reminder_time"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:background="@drawable/bg_ai_btn"
+            android:enabled="false"
+            android:gravity="center"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:text="@string/pick_reminder_date_time"
+            android:textColor="@color/ai_btn_text"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_reminder_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="6dp"
+        android:text="@string/reminder_not_set"
+        android:textColor="@color/sheet_desc"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_primary_btn"
+        android:gravity="center"
+        android:text="@string/btn_save"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+</LinearLayout>

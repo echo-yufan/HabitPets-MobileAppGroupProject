@@ -1,0 +1,33 @@
+# Gradle and Android build caches
+.gradle/
+**/build/
+.externalNativeBuild/
+.cxx/
+
+# Local SDK paths and IDE state
+local.properties
+*.iml
+/.idea/caches/
+/.idea/libraries/
+/.idea/shelf/
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+/.idea/deploymentTargetDropDown.xml
+/.idea/deploymentTargetSelector.xml
+
+# Generated packages, bytecode, and diagnostics
+*.apk
+*.aab
+*.ap_
+*.class
+*.dex
+*.hprof
+*.log
+/captures/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini

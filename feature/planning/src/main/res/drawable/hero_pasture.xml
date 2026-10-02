@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="220dp"
+    android:height="150dp"
+    android:viewportWidth="220"
+    android:viewportHeight="150">
+
+    <!-- Sun: cream halo + milk-white disc -->
+    <path
+        android:fillColor="#E8DFC8"
+        android:pathData="M178,30 a15,15 0 1,0 30,0 a15,15 0 1,0 -30,0"/>
+    <path
+        android:fillColor="#F5F2E3"
+        android:pathData="M183,30 a10,10 0 1,0 20,0 a10,10 0 1,0 -20,0"/>
+
+    <!-- Birds -->
+    <path
+        android:fillColor="#4A7A50"
+        android:pathData="M128,36 l6,5 l6,-5 l2,2 l-8,6 l-8,-6 z"/>
+    <path
+        android:fillColor="#4A7A50"
+        android:pathData="M153,25 l4.5,3.5 l4.5,-3.5 l1.5,1.5 l-6,4.5 l-6,-4.5 z"/>
+
+    <!-- Far hill (deep green) -->
+    <path
+        android:fillColor="#2B5335"
+        android:pathData="M70,150 L70,104 C96,68 150,58 184,78 C200,88 210,96 220,100 L220,150 Z"/>
+
+    <!-- Middle hill (mid green) -->
+    <path
+        android:fillColor="#4A7A50"
+        android:pathData="M70,150 L70,116 C102,88 156,84 192,102 C204,108 213,116 220,120 L220,150 Z"/>
+
+    <!-- Near hill (grass green) -->
+    <path
+        android:fillColor="#6FA262"
+        android:pathData="M70,150 L70,134 C106,114 158,112 194,126 C205,130 213,135 220,138 L220,150 Z"/>
+
+    <!-- Cow: tail (behind body) with tuft -->
+    <path
+        android:fillColor="#F5F2E3"
+        android:pathData="M174,86 C182,85 188,90 187,97 C186,101 184,103 182,104 C184,98 185,93 181,89 C179,87 176,86 174,86 Z"/>
+    <path
+        android:fillColor="#C9A96B"
+        android:pathData="M184,105 m-2.4,0 a2.4,2.4 0 1,0 4.8,0 a2.4,2.4 0 1,0 -4.8,0"/>
+
+    <!-- Cow: legs -->
+    <path
+        android:fillColor="#F5F2E3"
+        android:pathData="M126,98 h5 v20 a2.5,2.5 0 0 1 -5,0 z"/>
+    <path
+        android:fillColor="#F5F2E3"
+        android:pathData="M140,98 h5 v20 a2.5,2.5 0 0 1 -5,0 z"/>
+    <path
+        android:fillColor="#F5F2E3"
+        android:pathData="M160,98 h5 v20 a2.5,2.5 0 0 1 -5,0 z"/>
+    <path
+        android:fillColor="#F5F2E3"
+        android:pathData="M172,98 h5 v20 a2.5,2.5 0 0 1 -5,0 z"/>
+
+    <!-- Cow: body (rounded rectangle) -->
+    <path
+        android:fillColor="#F5F2E3"
+        android:pathData="M133,82 h36 a11,11 0 0 1 11,11 a11,11 0 0 1 -11,11 h-36 a11,11 0 0 1 -11,-11 a11,11 0 0 1 11,-11 z"/>
+
+    <!-- Cow: body patches (beige brown) -->
+    <path
+        android:fillColor="#C9A96B"
+        android:pathData="M137,92 a9,7 0 1,0 18,0 a9,7 0 1,0 -18,0"/>
+    <path
+        android:fillColor="#C9A96B"
+        android:pathData="M156,97 a7,5 0 1,0 14,0 a7,5 0 1,0 -14,0"/>
+
+    <!-- Cow: head -->
+    <path
+        android:fillColor="#F5F2E3"
+        android:pathData="M109,78 L119,78 A9,9 0 0 1 128,87 A9,9 0 0 1 119,96 L109,96 A9,9 0 0 1 100,87 A9,9 0 0 1 109,78 Z"/>
+
+    <!-- Cow: head patch -->
+    <path
+        android:fillColor="#C9A96B"
+        android:pathData="M116,84 a5,4 0 1,0 10,0 a5,4 0 1,0 -10,0"/>
+
+    <!-- Cow: ear -->
+    <path
+        android:fillColor="#C9A96B"
+        android:pathData="M117,78 C116,71 123,68 126,72 C129,76 122,80 118,80 Z"/>
+
+    <!-- Cow: muzzle (cream) -->
+    <path
+        android:fillColor="#E8DFC8"
+        android:pathData="M103,88 h6 a5,5 0 0 1 5,5 a5,5 0 0 1 -5,5 h-6 a5,5 0 0 1 -5,-5 a5,5 0 0 1 5,-5 z"/>
+
+    <!-- Cow: eye and nostril -->
+    <path
+        android:fillColor="#2B5335"
+        android:pathData="M106,85 m-1.6,0 a1.6,1.6 0 1,0 3.2,0 a1.6,1.6 0 1,0 -3.2,0"/>
+    <path
+        android:fillColor="#2B5335"
+        android:pathData="M104,93 m-1.2,0 a1.2,1.2 0 1,0 2.4,0 a1.2,1.2 0 1,0 -2.4,0"/>
+
+    <!-- Foreground grass tufts (light green) -->
+    <path
+        android:fillColor="#8FBF7F"
+        android:pathData="M86,140 C85,134 86,129 89,126 C88,130 88,135 89,140 Z M90,140 C90,133 91,128 94,125 C93,130 93,135 93,140 Z M94,140 C95,135 97,131 100,129 C98,133 97,136 97,140 Z"/>
+    <path
+        android:fillColor="#8FBF7F"
+        android:pathData="M202,142 C201,136 202,131 205,128 C204,132 204,137 205,142 Z M206,142 C206,135 208,130 211,127 C210,132 209,137 209,142 Z"/>
+    <path
+        android:fillColor="#8FBF7F"
+        android:pathData="M73,130 C72,124 73,119 76,116 C75,120 75,125 76,130 Z M77,130 C77,123 79,118 82,115 C81,120 80,125 80,130 Z"/>
+</vector>
