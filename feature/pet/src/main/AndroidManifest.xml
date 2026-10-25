@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <activity
+            android:name="com.example.pet.feature.pet.ui.PetActivity"
+            android:label="@string/pet_name"
+            android:exported="false" />
+    </application>
+</manifest>

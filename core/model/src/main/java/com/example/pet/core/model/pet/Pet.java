@@ -1,7 +1,26 @@
-/**
- * 职责预留：跨功能共享的宠物实体。
- *
- * 当前文件只有注释，尚未声明类、接口、方法或字段。
- * 未来描述宠物标识、形象和需求确定的状态。
- * 由宠物页面、个人中心和相关业务共同使用；保持纯 Java，不包含界面或数据库操作。
- */
+package com.example.pet.core.model.pet;
+
+/** 不可变的宠物信息；不依赖 Android 页面或存储。 */
+public final class Pet {
+    public static final int EXP_PER_LEVEL = 100;
+    private final String id, name, appearanceId;
+    private final int level, exp, mood, satiety;
+    public Pet(String id, String name, String appearanceId, int level, int exp, int mood, int satiety) {
+        if (id == null || id.trim().isEmpty() || name == null || name.trim().isEmpty()
+                || !"cow_brown".equals(appearanceId) || level < 1 || exp < 0 || exp >= EXP_PER_LEVEL
+                || mood < 0 || mood > 100 || satiety < 0 || satiety > 100) {
+            throw new IllegalArgumentException("Invalid pet state");
+        }
+        this.id = id; this.name = name; this.appearanceId = appearanceId;
+        this.level = level; this.exp = exp; this.mood = mood; this.satiety = satiety;
+    }
+    public String getId() { return id; }
+    public String getName() { return name; }
+    public String getAppearanceId() { return appearanceId; }
+    public int getLevel() { return level; }
+    public int getExp() { return exp; }
+    public int getMood() { return mood; }
+    /** 文档 hunger 的兼容读取名称；数值越高越饱。 */
+    public int getHunger() { return satiety; }
+    public int getSatiety() { return satiety; }
+}

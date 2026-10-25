@@ -45,4 +45,5 @@ dependencies {
     implementation project(':core:ai')
     implementation project(':feature:planning')
     implementation project(':feature:chat')
+    implementation project(':feature:pet')
 }

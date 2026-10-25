@@ -1,6 +1,9 @@
 package com.example.pet.app;
 
 import android.app.Application;
+import com.example.pet.feature.pet.di.PetRepositoryOwner;
+import com.example.pet.feature.pet.data.repository.PetRepository;
+import com.example.pet.feature.pet.data.local.LocalPetRepository;
 import android.os.Handler;
 import android.os.Looper;
 import com.example.pet.core.ai.LLMClient;
@@ -15,7 +18,12 @@ import com.example.pet.core.data.repository.LocalTaskRepository;
 import com.example.pet.core.data.repository.TaskRepository;
 
 /** App-level composition root. Keeps the existing repository's lazy initialization. */
-public final class PetApplication extends Application implements TaskRepositoryOwner, ChatRepositoryOwner {
+public final class PetApplication extends Application implements TaskRepositoryOwner, ChatRepositoryOwner, PetRepositoryOwner {
+    private PetRepository petRepository;
+    @Override public synchronized PetRepository getPetRepository() {
+        if (petRepository == null) petRepository = new LocalPetRepository(getSharedPreferences(LocalPetRepository.PREFERENCES_NAME, MODE_PRIVATE));
+        return petRepository;
+    }
     private ChatRepository chatRepository;
 
     @Override public ChatRepository getChatRepository() {

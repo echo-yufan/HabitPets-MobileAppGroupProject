@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pet.R;
 import com.example.pet.feature.chat.ui.ChatActivity;
+import com.example.pet.feature.pet.ui.PetActivity;
 import com.example.pet.feature.planning.ui.MemoActivity;
 
 /**
@@ -31,7 +32,12 @@ public class MainActivity extends AppCompatActivity {
         btnNote.setOnClickListener(v ->
                 startActivity(new Intent(MainActivity.this, MemoActivity.class)));
 
-        // 其他按钮（imageButton2/4/7）等队友后续接入
-        // 宠物形象 / 商店 / 个人中心时再补
+        // “宠物展示”按钮 → 牛来的页面
+        ImageButton btnPet = findViewById(R.id.imageButton2);
+        btnPet.setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, PetActivity.class)));
+
+        // 其他按钮（imageButton4/7）等队友后续接入
+        // 商店 / 个人中心时再补
     }
 }

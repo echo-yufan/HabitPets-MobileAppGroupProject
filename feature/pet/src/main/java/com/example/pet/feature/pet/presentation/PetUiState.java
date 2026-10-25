@@ -1,7 +1,16 @@
-/**
- * 职责预留：宠物界面的展示状态。
- *
- * 当前文件只有注释，尚未声明类、接口、方法或字段。
- * 未来描述宠物展示信息、可执行操作和页面加载/错误状态。
- * 使用不可变快照；具体字段根据最终宠物需求确定。
- */
+package com.example.pet.feature.pet.presentation;
+import com.example.pet.core.model.pet.Pet;
+/** 页面状态快照，区分加载、成功、失败。 */
+public final class PetUiState {
+    public final Pet pet;
+    public final boolean loading;
+    public final boolean failed;
+    private PetUiState(Pet pet, boolean loading, boolean failed) {
+        this.pet = pet; this.loading = loading; this.failed = failed;
+    }
+    public static PetUiState loading() { return loading(null); }
+    public static PetUiState loading(Pet previous) { return new PetUiState(previous, true, false); }
+    public static PetUiState ready(Pet pet) { return new PetUiState(pet, false, false); }
+    public static PetUiState error() { return error(null); }
+    public static PetUiState error(Pet previous) { return new PetUiState(previous, false, true); }
+}

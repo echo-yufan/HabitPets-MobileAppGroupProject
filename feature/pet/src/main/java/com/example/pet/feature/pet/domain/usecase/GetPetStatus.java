@@ -1,7 +1,8 @@
-/**
- * 职责预留：查看宠物状态的业务入口。
- *
- * 当前文件只有注释，尚未声明类、接口、方法或字段。
- * 未来读取当前宠物资料和状态，供页面展示。
- * 通过 Repository 获取数据，统一必要的业务判断，不依赖 Android 界面。
- */
+package com.example.pet.feature.pet.domain.usecase;
+import com.example.pet.core.model.pet.Pet;
+import com.example.pet.feature.pet.data.repository.PetRepository;
+public final class GetPetStatus {
+    private final PetRepository repository;
+    public GetPetStatus(PetRepository repository) { this.repository = repository; }
+    public Pet execute() { return repository.getPet(PetRepository.LOCAL_USER_ID); }
+}

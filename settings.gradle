@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "HabitPets"
-include ':app', ':core:model', ':core:data', ':core:common', ':core:ai', ':feature:planning', ':feature:chat'
+include ':app', ':core:model', ':core:data', ':core:common', ':core:ai', ':feature:planning', ':feature:chat', ':feature:pet'
