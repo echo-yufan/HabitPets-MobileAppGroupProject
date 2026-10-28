@@ -29,6 +29,21 @@ public class PetActivity extends AppCompatActivity {
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         });
         findViewById(R.id.pet_data_status).setOnClickListener(v -> model.load());
+        if (getApplication() instanceof com.example.pet.feature.pet.di.PetNavigationOwner) {
+            com.example.pet.feature.pet.di.PetNavigationOwner nav = (com.example.pet.feature.pet.di.PetNavigationOwner) getApplication();
+            findViewById(R.id.pet_feed_button).setOnClickListener(v -> nav.openShop(this, false));
+            findViewById(R.id.pet_dress_button).setOnClickListener(v -> nav.openShop(this, true));
+        } else {
+            findViewById(R.id.pet_feed_button).setEnabled(false);
+            findViewById(R.id.pet_dress_button).setEnabled(false);
+        }
+        View debug = findViewById(R.id.cd_debug_exp);
+        boolean debuggable = (getApplicationInfo().flags & android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE) != 0;
+        debug.setVisibility(debuggable ? View.VISIBLE : View.GONE);
+        debug.setOnClickListener(v -> new androidx.appcompat.app.AlertDialog.Builder(this)
+            .setTitle("增加真实宠物经验")
+            .setMessage("联调操作会永久增加 100 经验，用于验证商城等级解锁。是否继续？")
+            .setNegativeButton("取消", null).setPositiveButton("增加经验", (dialog, which) -> model.addExperience(100)).show());
     }
     @Override protected void onStart() { super.onStart(); model.load(); }
 

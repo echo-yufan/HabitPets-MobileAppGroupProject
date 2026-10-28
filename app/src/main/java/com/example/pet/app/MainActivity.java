@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
         btnPet.setOnClickListener(v ->
                 startActivity(new Intent(MainActivity.this, PetActivity.class)));
 
-        // 其他按钮（imageButton4/7）等队友后续接入
+        findViewById(R.id.imageButton4).setOnClickListener(v -> startActivity(new Intent(this, com.example.virtualpetd.ShopActivity.class)));
+        // 其他按钮（imageButton7）等队友后续接入
         // 商店 / 个人中心时再补
     }
 }

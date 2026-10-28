@@ -1,0 +1,61 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/shopRoot" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
+ <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="58dp" android:gravity="center_vertical" android:paddingHorizontal="12dp">
+  <ImageButton android:id="@+id/backButton" android:layout_width="48dp" android:layout_height="@dimen/shop_touch_target" android:background="?attr/selectableItemBackgroundBorderless" android:src="@drawable/shop_ic_back" android:padding="12dp" android:scaleType="centerInside" android:contentDescription="@string/shop_back"/>
+  <TextView android:id="@+id/pageTitle" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:gravity="center" android:textColor="@color/shop_text" android:textSize="19sp" android:textStyle="bold"/>
+  <TextView android:id="@+id/bagButton" android:layout_width="56dp" android:layout_height="@dimen/shop_touch_target" android:gravity="center" android:textColor="@color/shop_primary" android:textSize="14sp" android:textStyle="bold" android:background="?attr/selectableItemBackground" android:clickable="true" android:focusable="true"/>
+ </LinearLayout>
+ <ProgressBar android:id="@+id/loading" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="3dp" android:indeterminate="true"/>
+ <ScrollView android:id="@+id/shopScroll" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" android:fillViewport="true" android:clipToPadding="false">
+ <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="@dimen/shop_page_margin">
+  <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:minHeight="156dp" android:background="@drawable/shop_bg_hero" android:gravity="center_vertical" android:padding="@dimen/shop_page_margin">
+   <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+    <TextView android:id="@+id/heroTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="22sp" android:textStyle="bold" android:textColor="@color/shop_white"/>
+    <TextView android:id="@+id/heroSubtitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:textSize="12sp" android:textColor="@color/shop_white" android:lineSpacingExtra="3dp"/>
+   </LinearLayout>
+   <ImageView android:layout_width="80dp" android:layout_height="100dp" android:layout_marginStart="8dp" android:src="@drawable/shop_store" android:importantForAccessibility="no"/>
+  </LinearLayout>
+  <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:background="@drawable/shop_bg_gold" android:padding="18dp" android:gravity="center_vertical">
+   <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/shop_wallet" android:textColor="@color/shop_gold" android:textSize="13sp"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5dp" android:text="@string/shop_wallet_hint" android:textColor="@color/shop_gold" android:textSize="12sp"/>
+   </LinearLayout>
+   <ImageView android:layout_width="28dp" android:layout_height="28dp" android:src="@drawable/shop_coin" android:importantForAccessibility="no"/>
+   <TextView android:id="@+id/walletBalance" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="8dp" android:textSize="28sp" android:textColor="@color/shop_gold" android:textStyle="bold" android:accessibilityLiveRegion="polite"/>
+  </LinearLayout>
+  <LinearLayout android:id="@+id/levelPanel" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:background="@drawable/shop_bg_card" android:padding="16dp" android:orientation="vertical">
+   <TextView android:id="@+id/petLevel" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="17sp" android:textStyle="bold" android:textColor="@color/shop_text" android:accessibilityLiveRegion="polite"/>
+   <TextView android:id="@+id/unlockCount" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="8dp" android:textColor="@color/shop_secondary"/>
+   <ProgressBar android:id="@+id/unlockProgress" style="?android:attr/progressBarStyleHorizontal" android:layout_width="match_parent" android:layout_height="6dp" android:layout_marginTop="10dp"/>
+   <TextView android:id="@+id/nextUnlock" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:textColor="@color/shop_secondary" android:textSize="12sp"/>
+   <com.google.android.material.button.MaterialButton android:id="@+id/demoToggle" style="@style/Widget.MaterialComponents.Button.TextButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/shop_demo_tools"/>
+  </LinearLayout>
+  <LinearLayout android:id="@+id/demoPanel" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="16dp" android:background="@drawable/shop_bg_card" android:padding="16dp" android:orientation="vertical">
+   <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/shop_demo_title" android:textColor="@color/shop_text" android:textStyle="bold"/>
+   <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="@string/shop_demo_desc" android:textColor="@color/shop_secondary" android:textSize="12sp"/>
+   <com.google.android.material.button.MaterialButton android:id="@+id/demoReward" style="@style/ShopButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/shop_demo_reward"/>
+   <com.google.android.material.button.MaterialButton android:id="@+id/demoLevel" style="@style/ShopButton" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/shop_demo_level"/>
+   <TextView android:id="@+id/demoLevelNote" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/shop_demo_level_note" android:textColor="@color/shop_secondary" android:textSize="12sp"/>
+  </LinearLayout>
+  <LinearLayout android:id="@+id/errorPanel" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:visibility="gone">
+   <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/shop_load_error" android:textColor="@color/shop_error"/>
+   <com.google.android.material.button.MaterialButton android:id="@+id/retryButton" style="@style/ShopButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/shop_retry"/>
+  </LinearLayout>
+  <TextView android:id="@+id/sectionTitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="24dp" android:textSize="19sp" android:textStyle="bold" android:textColor="@color/shop_text"/>
+  <TextView android:id="@+id/sectionSubtitle" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="5dp" android:textSize="13sp" android:textColor="@color/shop_secondary"/>
+  <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:layout_marginBottom="12dp">
+   <com.google.android.material.button.MaterialButton android:id="@+id/filterAll" style="@style/ShopButton" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/shop_all" app:cornerRadius="24dp"/>
+   <com.google.android.material.button.MaterialButton android:id="@+id/filterFood" style="@style/ShopButton" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:layout_marginHorizontal="8dp" android:text="@string/shop_food" app:cornerRadius="24dp"/>
+   <com.google.android.material.button.MaterialButton android:id="@+id/filterClothes" style="@style/ShopButton" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="@string/shop_clothes" app:cornerRadius="24dp"/>
+  </LinearLayout>
+  <LinearLayout android:id="@+id/productGrid" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"/>
+  <LinearLayout android:id="@+id/emptyPanel" android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:orientation="vertical" android:padding="24dp" android:visibility="gone">
+   <ImageView android:layout_width="100dp" android:layout_height="100dp" android:src="@drawable/shop_bag" android:importantForAccessibility="no"/>
+   <TextView android:id="@+id/emptyTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textColor="@color/shop_text" android:textSize="18sp" android:textStyle="bold" android:layout_marginTop="16dp"/>
+   <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="@string/shop_empty_desc" android:textColor="@color/shop_secondary" android:gravity="center" android:layout_marginTop="8dp"/>
+   <com.google.android.material.button.MaterialButton android:id="@+id/emptyAction" style="@style/ShopButton" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="@string/shop_empty_action"/>
+  </LinearLayout>
+
+  <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center" android:layout_marginTop="20dp" android:layout_marginBottom="12dp" android:text="@string/shop_footer" android:textColor="@color/shop_secondary" android:textSize="12sp"/>
+ </LinearLayout>
+ </ScrollView>
+</LinearLayout>

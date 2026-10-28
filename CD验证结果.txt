@@ -1,0 +1,23 @@
+C+D 验证结果 — 2026-10-25
+
+环境：JDK17、AGP7.3.1、Gradle7.4；Pixel_6 模拟器 Android13/API33。
+
+通过：
+- 最终 :app:assembleDebug 与 :app:assembleDebugAndroidTest 构建成功。
+- Gradle test 成功；Debug 单元测试55项（Release 同组亦通过）。
+- C 模块设备测试38项，全部通过。
+- D 模块设备测试21项，全部通过。
+- 新增 C+D 整合测试4项，全部通过：真实成长解锁购买及库存/余额、重建仓库持久化、重复订单幂等、宿主真实仓库接线/关闭假等级、非法用户拒绝、首页/商城/宠物/背包导航（部分断言归于同一测试）。
+- 原通知导航测试5项，修正包名相关断言并开启模拟器通知权限后全部通过。
+- 宠物页和商城人工截图检查：入口完整可见，商城展示真实 Lv.1、解锁6/18件。
+
+扩展测试的限制：
+首轮运行原 app 全套设备测试时，新包名默认未获通知权限，出现通知前置条件失败及系统弹窗阻塞，因此中止该轮。没有宣称全套 app 设备测试通过。
+随后使用 adb install -r -g 安装测试版，以授予测试必需权限：
+C+D 4项 + 通知导航5项，共9项通过。
+另行重跑 ReminderTimeInstrumentedTest：6项中5项通过、1项失败。
+失败项 turningOffExpiredReminderAllowsSaveAndCancelsAlarm，NoMatchingViewException，找不到 sw_reminder（当时界面回到备忘列表）。此项属于保留的 planning 提醒编辑测试，本次未修改其业务逻辑；需后续单独排查，不影响已经通过的 C+D 验证结论。
+
+证据文件：docs/CD-test-results；页面截图：docs/CD-screenshots。
+APK 为 Debug 联调版；没有做正式签名发布。
+构建日志存在旧版工具与新版 SDK XML 的兼容提示，但不影响本次成功构建。

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.pet.feature.planning.presentation.MemoViewModelTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2026-10-25T12:35:34" hostname="jiangzhinandeMacBook-Air.local" time="0.016">
+  <properties/>
+  <testcase name="clearCompletedRetainsActiveTasks" classname="com.example.pet.feature.planning.presentation.MemoViewModelTest" time="0.009"/>
+  <testcase name="completionAndUndoKeepExistingReminderBehavior" classname="com.example.pet.feature.planning.presentation.MemoViewModelTest" time="0.001"/>
+  <testcase name="savedCommandIsSuccessfulEvenIfRefreshingListFails" classname="com.example.pet.feature.planning.presentation.MemoViewModelTest" time="0.001"/>
+  <testcase name="databaseFailureAllowsRetryAndDoesNotSendSuccess" classname="com.example.pet.feature.planning.presentation.MemoViewModelTest" time="0.0"/>
+  <testcase name="pastReminderRejectsEditBeforeMutatingTaskAndKeepsExistingAlarm" classname="com.example.pet.feature.planning.presentation.MemoViewModelTest" time="0.002"/>
+  <testcase name="destroyedModelDoesNotPublishQueuedResult" classname="com.example.pet.feature.planning.presentation.MemoViewModelTest" time="0.0"/>
+  <testcase name="writeCompletesBeforeRefreshAndDuplicateSubmissionIsRejected" classname="com.example.pet.feature.planning.presentation.MemoViewModelTest" time="0.0"/>
+  <testcase name="rejectedQueueDoesNotAcceptCommandOrLeaveScreenBusy" classname="com.example.pet.feature.planning.presentation.MemoViewModelTest" time="0.0"/>
+  <testcase name="editingUsesRepositoryObjectAndDeleteCancelsReminder" classname="com.example.pet.feature.planning.presentation.MemoViewModelTest" time="0.002"/>
+  <testcase name="batchWithPastReminderIsRejectedBeforeAnyInsert" classname="com.example.pet.feature.planning.presentation.MemoViewModelTest" time="0.0"/>
+  <testcase name="expiredWhileWaitingForDiskRejectsEditAndCanRetry" classname="com.example.pet.feature.planning.presentation.MemoViewModelTest" time="0.0"/>
+  <testcase name="writeFailureProducesAnUnsuccessfulMatchingResult" classname="com.example.pet.feature.planning.presentation.MemoViewModelTest" time="0.0"/>
+  <testcase name="filteringKeepsCountOfAllActiveTasks" classname="com.example.pet.feature.planning.presentation.MemoViewModelTest" time="0.0"/>
+  <testcase name="initializationWaitsForDiskAndPublishesOnlyOnMain" classname="com.example.pet.feature.planning.presentation.MemoViewModelTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

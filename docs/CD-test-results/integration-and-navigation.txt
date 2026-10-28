@@ -1,0 +1,9 @@
+
+com.example.pet.integration.CdIntegrationTest:....
+com.example.pet.app.NotificationNavigationInstrumentedTest:.....
+
+Time: 36.337
+
+OK (9 tests)
+
+

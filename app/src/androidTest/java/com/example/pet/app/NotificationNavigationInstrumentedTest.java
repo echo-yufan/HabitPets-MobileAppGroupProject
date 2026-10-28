@@ -161,8 +161,8 @@ public class NotificationNavigationInstrumentedTest {
         int home = 0, memo = 0;
         for (String line : dump.split("\n")) {
             if (!line.matches(".*Hist\\s+#\\d+:.*")) continue;
-            if (line.contains("com.example.pet/.app.MainActivity")) home++;
-            if (line.contains("com.example.pet/.feature.planning.ui.MemoActivity")) memo++;
+            if (line.contains(new android.content.ComponentName(context, MainActivity.class).flattenToShortString())) home++;
+            if (line.contains(new android.content.ComponentName(context, MemoActivity.class).flattenToShortString())) memo++;
         }
         assertEquals("Home stack entry count", homeCount, home);
         assertEquals("Memo stack entry count", memoCount, memo);

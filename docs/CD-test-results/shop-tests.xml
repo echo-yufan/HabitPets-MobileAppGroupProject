@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuite name="com.example.virtualpetd.EconomyInstrumentedTest" tests="21" failures="0" errors="0" skipped="0" time="0.407" timestamp="2026-10-25T12:37:36" hostname="localhost">
+  <properties>
+    <property name="device" value="Pixel_6(AVD) - 13" />
+    <property name="flavor" value="" />
+    <property name="project" value=":feature:shop" />
+  </properties>
+  <testcase name="freshWalletStartsAtZero" classname="com.example.virtualpetd.EconomyInstrumentedTest" time="0.032" />
+  <testcase name="batchStorageFailureRollsBackWholeOrder" classname="com.example.virtualpetd.EconomyInstrumentedTest" time="0.0" />
+  <testcase name="insufficientCoinsDoNotChangeInventory" classname="com.example.virtualpetd.EconomyInstrumentedTest" time="0.0" />
+  <testcase name="catalogHasEighteenDistinctProductsAndExpectedUnlockTiers" classname="com.example.virtualpetd.EconomyInstrumentedTest" time="0.031" />
+  <testcase name="usersHaveSeparateBalancesAndInventory" classname="com.example.virtualpetd.EconomyInstrumentedTest" time="0.0" />
+  <testcase name="batchRequestIsIdempotentAndRejectsChangedQuantity" classname="com.example.virtualpetd.EconomyInstrumentedTest" time="0.0" />
+  <testcase name="versionOneDatabaseMigratesWithoutLosingDataOrOrderIdentity" classname="com.example.virtualpetd.EconomyInstrumentedTest" time="0.031" />
+  <testcase name="lockedItemCannotBeBoughtEvenWithEnoughCoins" classname="com.example.virtualpetd.EconomyInstrumentedTest" time="0.0" />
+  <testcase name="savedLegacyBalanceMigratesOnlyOnce" classname="com.example.virtualpetd.EconomyInstrumentedTest" time="0.029" />
+  <testcase name="replayAfterLevelDropDoesNotChargeAgain" classname="com.example.virtualpetd.EconomyInstrumentedTest" time="0.0" />
+  <testcase name="repeatedRequestDoesNotDoubleDebitButNewFoodOrderWorks" classname="com.example.virtualpetd.EconomyInstrumentedTest" time="0.029" />
+  <testcase name="consumeAndEquipValidateOwnershipAndType" classname="com.example.virtualpetd.EconomyInstrumentedTest" time="0.0" />
+  <testcase name="uniqueClothesCannotBePurchasedTwice" classname="com.example.virtualpetd.EconomyInstrumentedTest" time="0.029" />
+  <testcase name="quantityBoundsAndUniqueClothesAreValidated" classname="com.example.virtualpetd.EconomyInstrumentedTest" time="0.002" />
+  <testcase name="concurrentOrdersCannotOverspend" classname="com.example.virtualpetd.EconomyInstrumentedTest" time="0.029" />
+  <testcase name="perUserLevelProviderReceivesCorrectUser" classname="com.example.virtualpetd.EconomyInstrumentedTest" time="0.001" />
+  <testcase name="failedInventoryInsertRollsBackDebit" classname="com.example.virtualpetd.EconomyInstrumentedTest" time="0.029" />
+  <testcase name="exactBalancePurchasePersistsAcrossReopen" classname="com.example.virtualpetd.EconomyInstrumentedTest" time="0.001" />
+  <testcase name="rewardsAreIdempotentAndRejectOverflow" classname="com.example.virtualpetd.EconomyInstrumentedTest" time="0.0" />
+  <testcase name="totalPriceNotJustUnitPriceIsChecked" classname="com.example.virtualpetd.EconomyInstrumentedTest" time="0.029" />
+  <testcase name="exactRequiredLevelUnlocksAndLevelIsReadAgainAtPurchase" classname="com.example.virtualpetd.EconomyInstrumentedTest" time="0.0" />
+</testsuite>

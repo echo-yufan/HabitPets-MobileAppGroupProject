@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<testsuite name="com.example.pet.feature.pet.LocalPetRepositoryTest" tests="38" failures="0" errors="0" skipped="0" time="0.264" timestamp="2026-10-25T12:37:33" hostname="localhost">
+  <properties>
+    <property name="device" value="Pixel_6(AVD) - 13" />
+    <property name="flavor" value="" />
+    <property name="project" value=":feature:pet" />
+  </properties>
+  <testcase name="firstReadCreatesDefaultPet" classname="com.example.pet.feature.pet.LocalPetRepositoryTest" time="0.004" />
+  <testcase name="incompleteRecordIsNotOverwrittenWithDefaults" classname="com.example.pet.feature.pet.LocalPetRepositoryTest" time="0.001" />
+  <testcase name="repeatedEntryKeepsIdentityAndSavedValues" classname="com.example.pet.feature.pet.LocalPetRepositoryTest" time="0.0" />
+  <testcase name="saveWritesValuesToActualDiskFile" classname="com.example.pet.feature.pet.LocalPetRepositoryTest" time="0.001" />
+  <testcase name="growthPersistsOnReopenAndDisk" classname="com.example.pet.feature.pet.LocalPetRepositoryTest" time="0.0" />
+  <testcase name="errorsPropagateWithoutFalseSuccess" classname="com.example.pet.feature.pet.PetContractTest" time="0.001" />
+  <testcase name="documentServiceNamesReturnSavedResults" classname="com.example.pet.feature.pet.PetContractTest" time="0.0" />
+  <testcase name="combinedChangeWritesOnceAndKeepsIdentity" classname="com.example.pet.feature.pet.PetContractTest" time="0.0" />
+  <testcase name="unsupportedEquipmentNeverWrites" classname="com.example.pet.feature.pet.PetContractTest" time="0.001" />
+  <testcase name="documentRepositoryMethodsPreserveExistingDiskRecord" classname="com.example.pet.feature.pet.PetContractTest" time="0.0" />
+  <testcase name="unknownUsersCannotAccessLocalPet" classname="com.example.pet.feature.pet.PetContractTest" time="0.0" />
+  <testcase name="zeroRewardDoesNotWrite" classname="com.example.pet.feature.pet.PetGrowthTest" time="0.0" />
+  <testcase name="rewardsQueuedDuringLoadAreNotLost" classname="com.example.pet.feature.pet.PetGrowthTest" time="0.0" />
+  <testcase name="negativeRewardDoesNotReadOrSave" classname="com.example.pet.feature.pet.PetGrowthTest" time="0.0" />
+  <testcase name="belowThreshold" classname="com.example.pet.feature.pet.PetGrowthTest" time="0.028" />
+  <testcase name="pagePublishesOnlyAfterSaveAndConsumesUpgradeOnce" classname="com.example.pet.feature.pet.PetGrowthTest" time="0.0" />
+  <testcase name="saveFailureDoesNotReturnSuccess" classname="com.example.pet.feature.pet.PetGrowthTest" time="0.001" />
+  <testcase name="multipleLevels" classname="com.example.pet.feature.pet.PetGrowthTest" time="0.0" />
+  <testcase name="exactThreshold" classname="com.example.pet.feature.pet.PetGrowthTest" time="0.0" />
+  <testcase name="levelOverflowRejectedWithoutSave" classname="com.example.pet.feature.pet.PetGrowthTest" time="0.0" />
+  <testcase name="largeRewardDoesNotOverflowExperience" classname="com.example.pet.feature.pet.PetGrowthTest" time="0.0" />
+  <testcase name="initialReadFailureCanRetryAndDuplicateLoadsAreIgnored" classname="com.example.pet.feature.pet.PetRecoveryTest" time="0.0" />
+  <testcase name="failedInitializationCanRetryWithoutTrustingFailedRecord" classname="com.example.pet.feature.pet.PetRecoveryTest" time="0.0" />
+  <testcase name="replacementObserverDoesNotRepeatUpgradeAndReceivesPendingOne" classname="com.example.pet.feature.pet.PetRecoveryTest" time="0.0" />
+  <testcase name="clearedPageIgnoresLateCallbacksButSavedDataCanBeReopened" classname="com.example.pet.feature.pet.PetRecoveryTest" time="0.0" />
+  <testcase name="failedCommitCannotLeakUnsavedRewardIntoNextRead" classname="com.example.pet.feature.pet.PetRecoveryTest" time="0.0" />
+  <testcase name="failedRewardBeforeInitialLoadDoesNotLeaveSpinnerForever" classname="com.example.pet.feature.pet.PetRecoveryTest" time="0.001" />
+  <testcase name="refreshAndFailedRefreshKeepLastSuccessfulValues" classname="com.example.pet.feature.pet.PetRecoveryTest" time="0.001" />
+  <testcase name="individualChangesPreserveOtherField" classname="com.example.pet.feature.pet.PetStatusTest" time="0.0" />
+  <testcase name="bothDirectionsClamp" classname="com.example.pet.feature.pet.PetStatusTest" time="0.001" />
+  <testcase name="pageWaitsForSaveAndPreservesOldValuesOnFailure" classname="com.example.pet.feature.pet.PetStatusTest" time="0.001" />
+  <testcase name="extremeDeltasDoNotOverflow" classname="com.example.pet.feature.pet.PetStatusTest" time="0.0" />
+  <testcase name="workerPerformsReadSaveAndMainReceivesState" classname="com.example.pet.feature.pet.PetStatusTest" time="0.0" />
+  <testcase name="zeroDeltasPreserveValues" classname="com.example.pet.feature.pet.PetStatusTest" time="0.001" />
+  <testcase name="failedSaveReturnsNoResultOrPartialState" classname="com.example.pet.feature.pet.PetStatusTest" time="0.0" />
+  <testcase name="savedPairSurvivesRepositoryReopenAndIsOnDisk" classname="com.example.pet.feature.pet.PetStatusTest" time="0.03" />
+  <testcase name="increasesAndDecreasesTogether" classname="com.example.pet.feature.pet.PetStatusTest" time="0.0" />
+  <testcase name="queuedGrowthAndStatusChangesPreserveEachOther" classname="com.example.pet.feature.pet.PetStatusTest" time="0.001" />
+</testsuite>
