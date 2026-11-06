@@ -1,0 +1,5 @@
+<resources>
+<dimen name="shop_page_margin">20dp</dimen><dimen name="shop_card_padding">12dp</dimen>
+<dimen name="shop_card_gap">12dp</dimen><dimen name="shop_touch_target">48dp</dimen>
+<dimen name="shop_sheet_padding">24dp</dimen><dimen name="shop_card_radius">17dp</dimen>
+</resources>

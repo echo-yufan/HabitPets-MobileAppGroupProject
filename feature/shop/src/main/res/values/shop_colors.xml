@@ -1,0 +1,7 @@
+<resources>
+<color name="shop_page">#F8F7EE</color><color name="shop_card">#FFFDF8</color>
+<color name="shop_primary">#628A62</color><color name="shop_text">#314A37</color>
+<color name="shop_secondary">#63725F</color><color name="shop_border">#E9EBDF</color>
+<color name="shop_chip">#ECEFE7</color><color name="shop_white">#FFFFFF</color>
+<color name="shop_gold_bg">#FFF2CC</color><color name="shop_gold">#85601E</color>
+<color name="shop_error">#9D5038</color></resources>

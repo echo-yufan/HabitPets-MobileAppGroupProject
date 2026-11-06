@@ -1,0 +1,35 @@
+<resources>
+    <string name="pet_name">NiuLai</string>
+    <string name="pet_welcome">Welcome to NiuLai\'s home</string>
+    <string name="pet_page_title">My Pet</string>
+    <string name="pet_page_subtitle">Growing together, every day</string>
+    <string name="pet_level">Lv.1</string>
+    <string name="pet_speech">You can do it!</string>
+    <string name="pet_image_description">NiuLai, a waving brown calf</string>
+    <string name="pet_demo_notice">Sample values</string>
+    <string name="pet_exp_label">Growth</string>
+    <string name="pet_exp_value">0 / 100 EXP</string>
+    <string name="pet_exp_display">Experience: 0 out of 100</string>
+    <string name="pet_growth_hint">Complete tasks to help NiuLai grow</string>
+    <string name="pet_mood_label">Mood</string>
+    <string name="pet_mood_value">Happy · 80/100</string>
+    <string name="pet_mood_display">Mood: 80 out of 100</string>
+    <string name="pet_satiety_label">Fullness</string>
+    <string name="pet_satiety_value">Well fed · 80/100</string>
+    <string name="pet_satiety_display">Fullness: 80 out of 100</string>
+    <string name="pet_feed_pending">Feed\nComing Soon</string>
+    <string name="pet_dress_pending">Dress Up\nComing Soon</string>
+    <string name="pet_loading">Loading NiuLai…</string>
+    <string name="pet_load_error">Could not load. Tap to retry.</string>
+    <string name="pet_saved_notice">Pet data saved on this device</string>
+    <string name="pet_level_format">Lv.%1$d</string>
+    <string name="pet_exp_format">%1$d / %2$d EXP</string>
+    <string name="pet_status_format">%1$d/100</string>
+    <string name="pet_exp_accessibility">Experience: %1$d out of %2$d</string>
+    <string name="pet_mood_accessibility">Mood: %1$d out of 100</string>
+    <string name="pet_satiety_accessibility">Fullness: %1$d out of 100</string>
+    <string name="pet_level_up">Level up! %1$s reached Lv.%2$d!</string>
+    <string name="pet_invalid_reward">This experience reward is not valid.</string>
+    <string name="pet_save_error">Could not save experience. Please try again later.</string>
+    <string name="pet_status_save_error">Could not save pet status. Please try again later.</string>
+</resources>

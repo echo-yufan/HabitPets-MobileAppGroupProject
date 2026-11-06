@@ -1,7 +1,24 @@
-/**
- * 职责预留：宠物 ViewModel 的依赖组装入口。
- *
- * 当前文件只有注释，尚未声明类、接口、方法或字段。
- * 未来从宿主 Application 提供的依赖获取宠物数据入口和用例。
- * 负责创建 ViewModel；不自行创建第二份全局数据库或宠物状态。
- */
+package com.example.pet.feature.pet.presentation;
+import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
+import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+import com.example.pet.core.common.concurrent.AppExecutors;
+import com.example.pet.feature.pet.di.PetRepositoryOwner;
+import com.example.pet.feature.pet.domain.usecase.GetPetStatus;
+import com.example.pet.feature.pet.domain.usecase.AddPetExp;
+import com.example.pet.feature.pet.domain.usecase.ChangePetStatus;
+public final class PetViewModelFactory implements ViewModelProvider.Factory {
+    private final PetRepositoryOwner owner;
+    public PetViewModelFactory(Context context) {
+        owner = (PetRepositoryOwner) context.getApplicationContext();
+    }
+    @NonNull @Override public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+        if (!modelClass.equals(PetViewModel.class)) throw new IllegalArgumentException("Unknown ViewModel");
+        Handler main = new Handler(Looper.getMainLooper());
+        return modelClass.cast(new PetViewModel(new GetPetStatus(owner.getPetRepository()),
+                new AddPetExp(owner.getPetRepository()), new ChangePetStatus(owner.getPetRepository()), AppExecutors.disk(), command -> main.post(command)));
+    }
+}

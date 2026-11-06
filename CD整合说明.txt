@@ -1,0 +1,66 @@
+HabitPets C+D 整合版（2026-10-25）
+
+一、打开与运行
+用 Android Studio 打开 HabitPets-CD 文件夹，等待 Gradle 同步，选择 app 运行。
+源码语言 Java；compileSdk/targetSdk/minSdk 均为 33（沿用 C 的最低版本）。
+构建工具沿用 C：Android Gradle Plugin 7.3.1 + Gradle 7.4，Gradle JDK 选择 17。
+local.properties 配置的是当前 Mac 的 SDK 路径，换电脑需由 Android Studio 重新生成。
+应用名称 HabitPets C+D，applicationId=com.example.pet.cd，与原来的 C、D 应用独立安装。
+旧 App 的私有数据库不自动迁移：整合版初次运行从 Lv.1、0 金币、空背包开始。
+
+二、已整合的内容
+1. C 的 feature:pet 保留宠物模型、真实等级/经验/心情/饱食度、成长服务及持久化。
+2. D 的独立 App 改为 feature:shop Android library，保留 18 商品、等级门槛、购买数量、金币、背包和交易校验。
+3. PetApplication 同时提供 PetRepositoryOwner 和 PetLevelProviderOwner。
+   RepositoryPetLevelProvider 每次从同一个 C 仓库读取 local_user 的真实等级。
+   商城刷新和确认购买均通过该接口读取；读取异常不会回退成可购买的模拟等级。
+4. 首页原“商店”图标现在进入 D 商城；宠物页底部增加“商城”“我的背包”入口。
+   商城与背包互相切换，返回键返回上一级。
+5. 宠物页 Debug 版提供“真实经验 +100”联调按钮，确认后通过 C 的成长用例更新真实数据。
+   商城 Debug 面板保留加金币入口，假等级选择自动隐藏；Release 版不显示联调按钮。
+6. 原有 A/B 源码随 C 基础工程保留，但本次没有新接入任务发奖或 AI 服务。
+
+三、接口与模块依赖
+app -> feature:pet、feature:shop。
+feature:pet 不依赖 feature:shop，PetNavigationOwner 由宿主实现跨页导航。
+feature:shop 不依赖 feature:pet，PetLevelProvider 由宿主适配真实等级。
+C Java 包 com.example.pet.feature.pet；D Java 包保留 com.example.virtualpetd，避免无必要重命名。
+两个模块使用同一个 local_user 身份。
+C 数据：habitpets_pet SharedPreferences；D 数据：economy.db SQLite。
+购买扣款、库存增加、订单记录在 D 的同一 SQLite 事务中完成。
+既有订单号重复提交不会重复扣款；同号不同商品或数量会被拒绝。
+
+分工文档要求保留的 D 入口：
+WalletService.getBalance/addCoins/spendCoins；
+ShopService.getItems/purchase；
+InventoryRepository.getItems/addItem/consumeItem/setEquipped。
+原 D 的 addCoins/spendCoins 返回 boolean，purchase 返回 PurchaseResult 枚举。
+本次保留已有实现签名，没有为适配文档的泛称 Result 强行破坏调用方。
+
+四、演示步骤
+1. 打开首页 -> 宠物，查看 Lv.1、经验和状态。
+2. 点“商城”，确认商城显示真实 Lv.1；Lv.2 饼干等商品锁定。
+3. 展开商城调试入口增加金币，查看商品详情，尝试购买锁定商品。
+4. 返回宠物页，点击真实经验 +100 并确认，宠物升到 Lv.2。
+5. 再进入商城，确认 Lv.2 商品已解锁；购买 2 份饼干（单价35，共70金币）。
+6. 打开背包，确认饼干数量2、余额减少70；退出重启后检查数据仍在。
+7. 更高等级商品保持各自 Lv.3/5/7/10 门槛，衣服不允许重复购买。
+
+五、本次范围与后续 E/A 对接
+喂食与穿衣交互属于 E；背包仍明确提示等待交互模块接入，不会假装成功或消费道具。
+C 的 equipAppearance 目前显式抛 UnsupportedOperationException，Pet 模型只允许 cow_brown。
+接 E 前需实现 C 外观支持，并设计“消费库存 + 更新宠物”跨存储失败恢复；不能先扣道具后忽略失败。
+A 的完成任务奖励尚未接入 C+D 联合发奖；调试加经验/金币不是任务奖励系统。
+后续必须用稳定的任务完成记录 ID 调 WalletService.addCoins，避免重复奖励。
+不要让其他模块另存一个 coins 或 petLevel 副本。
+
+六、源码位置
+宿主接线：app/src/main/java/com/example/pet/app/PetApplication.java
+等级适配：app/src/main/java/com/example/pet/app/RepositoryPetLevelProvider.java
+跨模块测试：app/src/androidTest/java/com/example/pet/integration/CdIntegrationTest.java
+C 模块：feature/pet
+D 模块：feature/shop
+
+七、验证
+构建、单元测试及模拟器验证结果详见同目录 CD验证结果.txt。
+本工程只在新副本中整合，未修改 C 原目录、VirtualPetD 或 HabitPets-MobileAppGroupProject。
