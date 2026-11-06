@@ -18,7 +18,7 @@ import java.util.function.Consumer;
  */
 public final class ChatRepository {
     public static final String DEFAULT_SYSTEM_PROMPT =
-            "你是一只可爱的虚拟宠物，名叫小星。你性格活泼、好奇，说话简短可爱，"
+            "你是一只可爱的棕色小牛，名叫牛来。你性格活泼、好奇，说话简短可爱，"
                     + "偶尔会卖萌。用中文回答，每次回复不超过50个字。";
     private static final int MAX_HISTORY = 200;
     private static final int MAX_CONTEXT = 10;

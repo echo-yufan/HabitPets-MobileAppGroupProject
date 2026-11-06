@@ -47,13 +47,14 @@ public final class InventoryRepository {
             db.setTransactionSuccessful(); return true;
         } finally { db.endTransaction(); }
     }
-    /** MVP has one outfit slot. This persists inventory state, not the pet's appearance. */
+    /** One item per body part; other equipped parts remain unchanged. */
     public boolean setEquipped(String itemId) {
         Item item=catalog.find(itemId); if(item==null || !"Clothes".equals(item.getType())) return false;
         SQLiteDatabase db=helper.getWritableDatabase(); db.beginTransaction();
         try {
             if(quantity(db,itemId)<1) return false;
-            db.execSQL("UPDATE inventory SET equipped=0 WHERE user_id=?",new Object[]{userId});
+            String[] ids=com.example.pet.core.model.pet.PetOutfits.idsForSlot(com.example.pet.core.model.pet.PetOutfits.slotOf(itemId));
+            for(String other:ids) db.execSQL("UPDATE inventory SET equipped=0 WHERE user_id=? AND item_id=?",new Object[]{userId,other});
             db.execSQL("UPDATE inventory SET equipped=1 WHERE user_id=? AND item_id=?",new Object[]{userId,itemId});
             db.setTransactionSuccessful(); return true;
         } finally { db.endTransaction(); }

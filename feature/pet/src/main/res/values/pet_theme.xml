@@ -1,0 +1,14 @@
+<resources>
+    <!-- The illustrated pet scene uses a deliberate light palette, including in system dark mode. -->
+    <style name="Theme.HabitPets.Pet" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">#476F50</item>
+        <item name="colorAccent">#476F50</item>
+        <item name="android:colorAccent">#476F50</item>
+        <item name="android:windowBackground">@color/pet_home_wall</item>
+        <item name="android:statusBarColor">#DDECF2</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">#DFEAC9</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:forceDarkAllowed">false</item>
+    </style>
+</resources>

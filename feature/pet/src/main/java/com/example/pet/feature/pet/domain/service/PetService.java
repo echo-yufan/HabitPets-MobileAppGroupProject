@@ -13,7 +13,9 @@ import com.example.pet.feature.pet.domain.usecase.ChangePetStatus;
 public final class PetService {
     private final AddPetExp growth;
     private final ChangePetStatus status;
+    private final PetRepository repository;
     public PetService(PetRepository repository) {
+        this.repository = repository;
         growth = new AddPetExp(repository);
         status = new ChangePetStatus(repository);
     }
@@ -25,12 +27,23 @@ public final class PetService {
         return status.execute(moodDelta, hungerDelta);
     }
     /**
-     * 文档约定的预留签名。尚无 D/E 商品到外观的映射或装备模型，
-     * 不写入数据、不返回成功；调用方必须处理此异常，不能据此扣物品。
+     * E's host coordinator validates ownership and persists the outfit in inventory.
+     * The cow base appearance remains unchanged. Standalone C hosts must provide E first.
      */
     public Pet equipAppearance(String itemId) {
         if (itemId == null || itemId.trim().isEmpty())
             throw new IllegalArgumentException("Item ID required");
-        throw new UnsupportedOperationException("Equipment integration is not implemented yet");
+        if (repository instanceof com.example.pet.core.model.pet.PetInteractions) {
+            if (!com.example.pet.core.model.pet.PetOutfits.contains(itemId))
+                throw new IllegalArgumentException("Expected clothing");
+            com.example.pet.core.model.pet.PetInteractions.Result result =
+                    ((com.example.pet.core.model.pet.PetInteractions) repository).useItem(itemId, java.util.UUID.randomUUID().toString());
+            if (result.food) throw new IllegalArgumentException("Expected clothing");
+            if (result.status != com.example.pet.core.model.pet.PetInteractions.Status.SUCCESS
+                    && result.status != com.example.pet.core.model.pet.PetInteractions.Status.ALREADY_EQUIPPED)
+                throw new IllegalStateException("Equipment failed: " + result.status);
+            return repository.getPet(PetRepository.LOCAL_USER_ID);
+        }
+        throw new UnsupportedOperationException("Host must provide PetInteractions for equipment");
     }
 }

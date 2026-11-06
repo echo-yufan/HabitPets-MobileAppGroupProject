@@ -47,4 +47,5 @@ dependencies {
     implementation project(':feature:chat')
     implementation project(':feature:pet')
     implementation project(':feature:shop')
+    implementation project(':feature:interaction')
 }

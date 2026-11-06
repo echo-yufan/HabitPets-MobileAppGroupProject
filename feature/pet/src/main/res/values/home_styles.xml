@@ -1,0 +1,8 @@
+<resources>
+<style name="PetHomeFloating" parent="Widget.AppCompat.Button"><item name="android:stateListAnimator">@null</item><item name="android:elevation">1dp</item></style>
+<style name="PetHomeNav" parent="PetHomeFloating"><item name="android:background">@drawable/pet_home_button</item><item name="backgroundTint">@null</item><item name="android:textColor">@color/pet_home_ink</item><item name="android:textAllCaps">false</item><item name="android:textSize">15sp</item><item name="android:minHeight">84dp</item><item name="android:padding">8dp</item><item name="android:drawablePadding">6dp</item><item name="android:fontFamily">sans-serif-medium</item></style>
+<style name="PetHomeAction" parent="PetHomeNav"><item name="android:minHeight">64dp</item><item name="android:textSize">18sp</item><item name="android:padding">12dp</item></style>
+<style name="PetHomeMetric"><item name="android:layout_width">0dp</item><item name="android:layout_height">wrap_content</item><item name="android:layout_weight">1</item><item name="android:orientation">vertical</item><item name="android:paddingEnd">8dp</item></style>
+<style name="PetHomeLabel"><item name="android:layout_width">match_parent</item><item name="android:layout_height">wrap_content</item><item name="android:textSize">13sp</item><item name="android:textColor">@color/pet_home_ink</item></style>
+<style name="PetHomeProgress" parent="Widget.AppCompat.ProgressBar.Horizontal"><item name="android:layout_width">match_parent</item><item name="android:layout_height">8dp</item><item name="android:layout_marginTop">6dp</item><item name="android:progressDrawable">@drawable/pet_progress</item></style>
+</resources>

@@ -23,6 +23,7 @@
         <!-- 入口页 -->
         <activity
             android:name=".app.MainActivity"
+            android:theme="@style/Theme.HabitPets.Pet"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

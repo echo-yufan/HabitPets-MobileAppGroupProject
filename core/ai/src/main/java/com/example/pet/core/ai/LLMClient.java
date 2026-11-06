@@ -24,8 +24,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class LLMClient {
 
     // ========== 配置区域 ==========
-    // 建议后续改为从 BuildConfig 或配置文件读取，避免硬编码
-    private static final String API_KEY = "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";
+    // 密钥由本机配置生成到 BuildConfig，源码不保存凭据。
+    private static final String API_KEY = BuildConfig.LLM_API_KEY;
     private static final String API_URL = "https://openrouter.ai/api/v1/chat/completions";
     private static final String MODEL = "inclusionai/ling-3.0-flash-sante:free";
     // ==============================

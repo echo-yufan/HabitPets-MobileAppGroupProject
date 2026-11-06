@@ -1,0 +1,20 @@
+<resources>
+<string name="pet_back">返回</string><string name="pet_home_subtitle">今天也一起好好生活</string>
+<string name="pet_nav_shop">商城</string><string name="pet_nav_tasks">备忘录</string><string name="pet_nav_chat">聊天</string>
+<string name="pet_home_coins">金币 %1$d</string><string name="pet_care_feed_title">喂食</string><string name="pet_care_dress_title">衣帽间</string>
+<string name="pet_care_worn">已穿</string><string name="pet_care_quantity_short">×%1$d</string>
+<string name="pet_care_feed_hint">点一份就喂食，状态满时不消耗</string><string name="pet_care_dress_hint">每个部位一件，帽子和围巾可以一起穿</string>
+<string name="pet_care_close">收起面板</string><string name="pet_care_shop">去商城补货</string><string name="pet_care_empty">这里还空着，去商城挑一份吧。</string>
+<string name="pet_care_loading">正在读取背包…</string><string name="pet_care_error">读取失败，点击重试</string><string name="pet_care_working">正在保存，请稍候…</string>
+<string name="pet_care_count">拥有 %1$d 份</string><string name="pet_care_gain">饱腹 +%1$d　心情 +%2$d</string>
+<string name="pet_care_feed">喂食</string><string name="pet_care_equip">穿上</string><string name="pet_care_remove">脱下</string>
+<string name="pet_slot_all">全部</string><string name="pet_slot_head">头部</string><string name="pet_slot_neck">颈部</string><string name="pet_slot_body">身体</string>
+<string name="pet_care_saved_feed">吃好啦！饱腹 +%1$d，心情 +%2$d</string><string name="pet_care_saved_dress">新造型好看吗？</string>
+<string name="pet_care_saved_remove">脱好啦，试试别的搭配吧。</string><string name="pet_care_full">心情和饱腹度都满啦，没有消耗食物。</string>
+<string name="pet_care_no_stock">这份物品已用完，请刷新背包。</string><string name="pet_care_pending">操作正在恢复，请点击重试，不会重复消耗。</string>
+<string name="pet_care_failed">没有确认保存成功，请点击重试。</string><string name="pet_care_hungry">肚子咕咕叫，想吃点小点心。</string>
+<string name="pet_care_sad">今天有点低落，陪陪我好吗？</string>
+<item type="id" name="care_close"/><item type="id" name="care_list"/><item type="id" name="care_status"/><item type="id" name="care_shop"/><item type="id" name="care_title"/>
+<item type="id" name="care_item_action"/><item type="id" name="care_item_name"/><item type="id" name="care_item_quantity"/>
+<item type="id" name="care_slot_head"/><item type="id" name="care_slot_neck"/><item type="id" name="care_slot_body"/><item type="id" name="care_slot_all"/>
+</resources>

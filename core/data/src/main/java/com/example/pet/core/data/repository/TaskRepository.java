@@ -22,6 +22,11 @@ public interface TaskRepository {
     void updateTask(Task task);
     void deleteTask(long taskId);
     void setCompleted(long taskId, boolean completed);
+    /** Returns a receipt only for the first rewarded completion; older hosts may return null. */
+    default com.example.pet.core.model.task.TaskCompletionReward setCompletedWithReward(long taskId, boolean completed) {
+        setCompleted(taskId, completed);
+        return null;
+    }
     int clearAll();
     int clearCompleted();
 }

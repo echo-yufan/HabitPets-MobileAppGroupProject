@@ -61,13 +61,11 @@ public class CdIntegrationTest {
  }
  @Test public void homePetShopAndInventoryNavigationWorks() {
   try (androidx.test.core.app.ActivityScenario<com.example.pet.app.MainActivity> scenario = androidx.test.core.app.ActivityScenario.launch(com.example.pet.app.MainActivity.class)) {
-   androidx.test.espresso.Espresso.onView(androidx.test.espresso.matcher.ViewMatchers.withId(com.example.pet.R.id.imageButton4)).perform(androidx.test.espresso.action.ViewActions.click());
+   androidx.test.espresso.Espresso.onView(androidx.test.espresso.matcher.ViewMatchers.withId(com.example.pet.feature.pet.R.id.pet_shop_button)).perform(androidx.test.espresso.action.ViewActions.scrollTo(),androidx.test.espresso.action.ViewActions.click());
    androidx.test.espresso.Espresso.onView(androidx.test.espresso.matcher.ViewMatchers.withId(com.example.virtualpetd.R.id.pageTitle)).check(androidx.test.espresso.assertion.ViewAssertions.matches(androidx.test.espresso.matcher.ViewMatchers.isDisplayed()));
    androidx.test.espresso.Espresso.pressBack();
-   androidx.test.espresso.Espresso.onView(androidx.test.espresso.matcher.ViewMatchers.withId(com.example.pet.R.id.imageButton2)).perform(androidx.test.espresso.action.ViewActions.click());
-   androidx.test.espresso.Espresso.onView(androidx.test.espresso.matcher.ViewMatchers.withId(com.example.pet.feature.pet.R.id.pet_dress_button)).perform(androidx.test.espresso.action.ViewActions.click());
-   androidx.test.espresso.Espresso.onView(androidx.test.espresso.matcher.ViewMatchers.withId(com.example.virtualpetd.R.id.pageTitle)).check(androidx.test.espresso.assertion.ViewAssertions.matches(androidx.test.espresso.matcher.ViewMatchers.withText(com.example.virtualpetd.R.string.shop_inventory_title)));
-   androidx.test.espresso.Espresso.pressBack();
+   androidx.test.espresso.Espresso.onView(androidx.test.espresso.matcher.ViewMatchers.withId(com.example.pet.feature.pet.R.id.pet_dress_button)).perform(androidx.test.espresso.action.ViewActions.scrollTo(),androidx.test.espresso.action.ViewActions.click());
+   androidx.test.espresso.Espresso.onView(androidx.test.espresso.matcher.ViewMatchers.withId(com.example.pet.feature.pet.R.id.care_title)).check(androidx.test.espresso.assertion.ViewAssertions.matches(androidx.test.espresso.matcher.ViewMatchers.withText(com.example.pet.feature.pet.R.string.pet_care_dress_title)));
    androidx.test.espresso.Espresso.pressBack();
   }
  }

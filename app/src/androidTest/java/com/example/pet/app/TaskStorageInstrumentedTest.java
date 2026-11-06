@@ -210,7 +210,7 @@ public class TaskStorageInstrumentedTest {
         awaitResumed(MainActivity.class);
         onMain(() -> {
             for (Activity a : ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED)) {
-                if (a instanceof MainActivity) a.findViewById(com.example.pet.R.id.imageButton5).performClick();
+                if (a instanceof MainActivity) a.findViewById(com.example.pet.feature.pet.R.id.pet_tasks_button).performClick();
             }
         });
         awaitResumed(MemoActivity.class);

@@ -12,7 +12,9 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "HabitPets-CD"
-include ':app', ':core:model', ':core:data', ':core:common', ':core:ai', ':feature:planning', ':feature:chat', ':feature:pet'
+rootProject.name = "HabitPets"
 
-include ':feature:shop'
+// Host assembles features; core modules contain shared contracts and infrastructure.
+include ':app'
+include ':core:model', ':core:data', ':core:common', ':core:ai'
+include ':feature:planning', ':feature:chat', ':feature:pet', ':feature:shop', ':feature:interaction'

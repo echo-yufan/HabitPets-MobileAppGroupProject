@@ -24,7 +24,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -46,8 +45,7 @@ public class ChatStateInstrumentedTest {
     private static final int RETRY = com.example.pet.feature.chat.R.id.btnRetry;
     private static final int HISTORY = com.example.pet.feature.chat.R.id.tvChatHistory;
     private PetApplication application;
-    private Field dependency;
-    private ChatRepository original;
+    private AppDependencyOverride dependency;
     private ChatRepository repository;
     private FakeGateway gateway;
     private String preferenceName;
@@ -56,26 +54,24 @@ public class ChatStateInstrumentedTest {
     @Before public void setUp() throws Exception {
         application = (PetApplication) InstrumentationRegistry.getInstrumentation()
                 .getTargetContext().getApplicationContext();
-        dependency = PetApplication.class.getDeclaredField("chatRepository");
-        dependency.setAccessible(true);
         gateway = new FakeGateway();
         preferenceName = "chat_test_" + UUID.randomUUID();
         preferences = application.getSharedPreferences(preferenceName, Context.MODE_PRIVATE);
         main(() -> {
-            original = (ChatRepository) dependency.get(application);
+            dependency = new AppDependencyOverride(application, "chatRepository");
             repository = newRepository(new MemoryStore());
-            dependency.set(application, repository);
+            dependency.set(repository);
             return null;
         });
     }
     @After public void tearDown() throws Exception {
         main(() -> {
             if (repository != null) repository.reset();
-            dependency.set(application, original);
+            if (dependency != null) dependency.close();
             return null;
         });
         flushDisk();
-        application.deleteSharedPreferences(preferenceName);
+        if (preferenceName != null) application.deleteSharedPreferences(preferenceName);
     }
 
     @Test public void leaveAndReenterShowsBusyThenReplyWithoutDuplicateRequest() throws Exception {
@@ -217,7 +213,7 @@ public class ChatStateInstrumentedTest {
     private void installPersistentRepository() throws Exception {
         main(() -> {
             repository = newRepository(new PreferencesChatHistoryStore(preferences, AppExecutors.disk()));
-            dependency.set(application, repository);
+            dependency.set(repository);
             return null;
         });
     }

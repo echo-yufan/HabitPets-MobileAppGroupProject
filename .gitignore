@@ -6,6 +6,9 @@
 
 # Local SDK paths and IDE state
 local.properties
+/.idea/
+.env
+.env.*
 *.iml
 /.idea/caches/
 /.idea/libraries/

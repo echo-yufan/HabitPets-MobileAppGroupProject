@@ -16,6 +16,7 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import com.example.pet.core.common.concurrent.AppExecutors;
 import com.example.pet.core.data.di.AppDependencies;
 import com.example.pet.core.data.repository.TaskRepository;
+import com.example.pet.core.data.repository.LocalTaskRepository;
 import com.example.pet.core.model.task.Task;
 import com.example.pet.feature.planning.platform.notification.NotificationHelper;
 import com.example.pet.feature.planning.platform.reminder.ReminderReceiver;
@@ -34,38 +35,51 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import static org.junit.Assert.*;
 
-/** Real SQLite, AlarmManager, manifest receiver and system notifications on API 33.
- * Run only on a test device with an empty task list: bulk-clear tests reject existing data.
- */
+/** Real SQLite, AlarmManager, manifest receiver and notifications with an isolated task database. */
 @RunWith(AndroidJUnit4.class)
 public class TaskReminderInstrumentedTest {
     private Context context;
     private TaskRepository repo;
     private MemoViewModel model;
+    private LocalTaskRepository isolatedRepository;
+    private AppDependencyOverride dependency;
+    private String databaseName;
     private final List<Long> created = new ArrayList<>();
 
     @Before public void setUp() throws Exception {
         context = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        repo = AppDependencies.taskRepository(context);
-        assertTrue("Use an empty test device; refusing to clear existing tasks",
-                disk(() -> repo.getTasks(TaskRepository.FILTER_ALL).isEmpty()));
         assertTrue("Notification permission must be enabled for this test", NotificationHelper.isGranted(context));
+        databaseName = "reminder_test_" + java.util.UUID.randomUUID() + ".db";
+        isolatedRepository = new LocalTaskRepository(context, databaseName);
+        repo = isolatedRepository;
         NotificationHelper.ensureChannel(context);
         Handler main = new Handler(Looper.getMainLooper());
-        onMain(() -> model = new MemoViewModel(repo, AppExecutors.disk(), r -> main.post(r),
+        onMain(() -> {
+            dependency = new AppDependencyOverride((PetApplication) context.getApplicationContext(), "taskRepository");
+            dependency.set(repo);
+            model = new MemoViewModel(repo, AppExecutors.disk(), r -> main.post(r),
                 () -> { }, new MemoViewModel.Reminders() {
                     @Override public void schedule(Task task) { ReminderScheduler.schedule(context, task); }
                     @Override public void cancel(long id) { ReminderScheduler.cancel(context, id); }
-                }));
+                });
+        });
         idle();
     }
 
     @After public void tearDown() throws Exception {
-        if (repo == null) return;
-        disk(() -> {
-            for (long id : created) { repo.deleteTask(id); ReminderScheduler.cancel(context, id); }
-            return null;
-        });
+        try {
+            if (repo != null) disk(() -> {
+                for (long id : created) { repo.deleteTask(id); ReminderScheduler.cancel(context, id); }
+                return null;
+            });
+        } finally {
+            onMain(() -> { if (dependency != null) dependency.close(); });
+            if (isolatedRepository != null) disk(() -> {
+                isolatedRepository.close();
+                context.deleteDatabase(databaseName);
+                return null;
+            });
+        }
     }
 
     @Test public void realAlarmDisplaysNotificationWhileAppIsInBackground() throws Exception {

@@ -1,9 +1,18 @@
 plugins { id 'com.android.library' }
 
+// Preserve the existing client behavior while keeping credentials out of tracked source.
+def localConfig = new Properties()
+def localConfigFile = rootProject.file('local.properties')
+if (localConfigFile.exists()) localConfigFile.withInputStream { localConfig.load(it) }
+def llmApiKey = System.getenv('HABITPETS_LLM_API_KEY') ?: localConfig.getProperty('habitpets.llm.apiKey', '')
+
 android {
     namespace 'com.example.pet.core.ai'
     compileSdk 33
-    defaultConfig { minSdk 33 }
+    defaultConfig {
+        minSdk 33
+        buildConfigField 'String', 'LLM_API_KEY', groovy.json.JsonOutput.toJson(llmApiKey)
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

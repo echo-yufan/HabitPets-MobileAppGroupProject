@@ -15,12 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 统一任务数据入口（分工文档 4.3 接口约定的 B 侧本地实现）。
- * 通过 core.data.repository.TaskRepository 暴露数据契约；本类保留当前 SQLite 实现：
- * getTodayTasks(date) / createTask(task) / updateTask(task) / deleteTask(taskId)
- * B 额外提供 getUpcomingTasks(startDate, endDate)（分工文档 5.3）。
+ * 任务与备忘录的 SQLite 数据入口。所有读写在后台队列执行。
+ * 首次完成状态和奖励收据在同一事务中保存，具体金币/经验交付由宿主协调层处理。
+ * 不直接依赖宠物、商城或界面模块，避免形成跨功能循环依赖。
  */
-public class LocalTaskRepository implements TaskRepository {
+public class LocalTaskRepository implements TaskRepository, com.example.pet.core.model.task.TaskRewardSource {
 
     private static final long DAY_MS = 24L * 60 * 60 * 1000;
     private static volatile LocalTaskRepository instance;
@@ -28,7 +27,11 @@ public class LocalTaskRepository implements TaskRepository {
     private final TaskDbHelper helper;
 
     private LocalTaskRepository(Context context) {
-        helper = new TaskDbHelper(context.getApplicationContext());
+        this(context, TaskDbHelper.DB_NAME);
+    }
+
+    public LocalTaskRepository(Context context, String databaseName) {
+        helper = new TaskDbHelper(context.getApplicationContext(), databaseName);
     }
 
     public static LocalTaskRepository getInstance(Context context) {
@@ -167,11 +170,31 @@ public class LocalTaskRepository implements TaskRepository {
     /** 契约方法：更新任务 */
     @Override
     public void updateTask(Task task) {
+        updateWithReward(task);
+    }
+
+    private com.example.pet.core.model.task.TaskCompletionReward updateWithReward(Task task) {
         SQLiteDatabase db = writableDatabase();
-        int changed = db.update(TaskDbHelper.TABLE_TASKS, toValues(task), "id = ?",
-                new String[]{String.valueOf(task.id)});
-        if (changed == 0) throw new TaskNotFoundException(task.id);
-        if (changed != 1) throw new SQLiteException("Task update affected unexpected number of rows");
+        db.beginTransaction();
+        try {
+            Task before = getTask(task.id);
+            if (before == null) throw new TaskNotFoundException(task.id);
+            com.example.pet.core.model.task.TaskCompletionReward reward = null;
+            if (task.completed && !before.completed) {
+                // Receipts survive undo and task deletion so the same task cannot grant twice.
+                if (task.rewardCoins < 0 || task.rewardExp < 0) throw new IllegalArgumentException("Negative task reward");
+                try (Cursor c = db.rawQuery("SELECT 1 FROM task_reward_outbox WHERE task_id=?", new String[]{String.valueOf(task.id)})) {
+                    if (!c.moveToFirst()) {
+                        reward = new com.example.pet.core.model.task.TaskCompletionReward("task:" + java.util.UUID.randomUUID(), task.id, task.rewardCoins, task.rewardExp);
+                        db.execSQL("INSERT INTO task_reward_outbox(source,task_id,coins,exp) VALUES (?,?,?,?)", new Object[]{reward.source, task.id, reward.coins, reward.exp});
+                    }
+                }
+            }
+            int changed = db.update(TaskDbHelper.TABLE_TASKS, toValues(task), "id = ?", new String[]{String.valueOf(task.id)});
+            if (changed != 1) throw new SQLiteException("Task update affected unexpected number of rows");
+            db.setTransactionSuccessful();
+            return reward;
+        } finally { db.endTransaction(); }
     }
 
     /** 契约方法：删除任务 */
@@ -184,14 +207,33 @@ public class LocalTaskRepository implements TaskRepository {
     /** 完成打卡 / 取消打卡 */
     @Override
     public void setCompleted(long taskId, boolean completed) {
+        setCompletedWithReward(taskId, completed);
+    }
+
+    @Override public com.example.pet.core.model.task.TaskCompletionReward setCompletedWithReward(long taskId, boolean completed) {
         Task task = getTask(taskId);
         if (task == null) {
             throw new TaskNotFoundException(taskId);
         }
+        if (task.completed == completed) return null;
         task.completed = completed;
         task.completedAt = completed ? System.currentTimeMillis() : null;
-        updateTask(task);
+        return updateWithReward(task);
     }
+
+    @Override public List<com.example.pet.core.model.task.TaskCompletionReward> pendingRewards() {
+        List<com.example.pet.core.model.task.TaskCompletionReward> pending = new ArrayList<>();
+        try (Cursor c = readableDatabase().rawQuery("SELECT source,task_id,coins,exp FROM task_reward_outbox WHERE delivered=0 ORDER BY rowid", null)) {
+            while (c.moveToNext()) pending.add(new com.example.pet.core.model.task.TaskCompletionReward(c.getString(0), c.getLong(1), c.getInt(2), c.getInt(3)));
+        }
+        return pending;
+    }
+
+    @Override public void acknowledgeReward(String source) {
+        writableDatabase().execSQL("UPDATE task_reward_outbox SET delivered=1 WHERE source=?", new Object[]{source});
+    }
+
+    public void close() { helper.close(); }
 
     /** 清空所有任务 */
     @Override

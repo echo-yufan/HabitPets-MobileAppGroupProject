@@ -86,7 +86,7 @@ public class EconomyInstrumentedTest {
         assertTrue(inventory.addItem("hat"));assertFalse(inventory.addItem("hat"));assertTrue(inventory.setEquipped("hat"));
         assertFalse(inventory.consumeItem("hat"));assertTrue(inventory.addItem("bow"));assertTrue(inventory.setEquipped("bow"));
         int equipped=0;for(com.example.virtualpetd.model.InventoryItem item:inventory.getItems())if(item.isEquipped())equipped++;
-        assertEquals(1,equipped);
+        assertEquals(2,equipped); // Hat and bow occupy different body parts.
     }
     @Test public void usersHaveSeparateBalancesAndInventory(){
         wallet.addCoins(100,"r");shop.purchase("apple","p");
@@ -167,7 +167,7 @@ public class EconomyInstrumentedTest {
         assertEquals(SUCCESS,migratedShop.purchase("hat",1,"old-order"));
         assertEquals(80,migratedWallet.getBalance());
         assertTrue(new InventoryRepository(context,db,EconomyDatabase.LOCAL_USER).getItems().get(0).isEquipped());
-        assertEquals(2,db.getReadableDatabase().getVersion());
+        assertEquals(4,db.getReadableDatabase().getVersion());
     }
     @Test public void replayAfterLevelDropDoesNotChargeAgain() {
         java.util.concurrent.atomic.AtomicInteger level = new java.util.concurrent.atomic.AtomicInteger(10);

@@ -17,7 +17,7 @@ public final class EconomyDatabase extends SQLiteOpenHelper {
         return instance;
     }
     public EconomyDatabase(Context context, String name) {
-        super(context.getApplicationContext(), name, null, 2);
+        super(context.getApplicationContext(), name, null, 4);
         this.context = context.getApplicationContext();
     }
     @Override public void onCreate(SQLiteDatabase db) {
@@ -25,6 +25,8 @@ public final class EconomyDatabase extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE inventory (user_id TEXT NOT NULL, item_id TEXT NOT NULL, quantity INTEGER NOT NULL CHECK(quantity >= 0), equipped INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(user_id,item_id))");
         db.execSQL("CREATE TABLE rewards (user_id TEXT NOT NULL, source TEXT NOT NULL, amount INTEGER NOT NULL, PRIMARY KEY(user_id,source))");
         db.execSQL("CREATE TABLE purchases (user_id TEXT NOT NULL, request_id TEXT NOT NULL, item_id TEXT NOT NULL, quantity INTEGER NOT NULL DEFAULT 1, PRIMARY KEY(user_id,request_id))");
+        createInteractions(db);
+        createTaskRewards(db);
         SharedPreferences old = context.getSharedPreferences("wallet_prefs", Context.MODE_PRIVATE);
         // Only an actually saved legacy balance is migrated; clean installations start at zero.
         int balance = Math.max(0, old.getInt("coin_balance", 0));
@@ -35,5 +37,13 @@ public final class EconomyDatabase extends SQLiteOpenHelper {
             // Every v1 order was exactly one item. Keep historical request IDs intact.
             db.execSQL("ALTER TABLE purchases ADD COLUMN quantity INTEGER NOT NULL DEFAULT 1");
         }
+        if (oldVersion < 3) createInteractions(db);
+        if (oldVersion < 4) createTaskRewards(db);
+    }
+    private static void createInteractions(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE pet_interactions (user_id TEXT NOT NULL, request_id TEXT NOT NULL, item_id TEXT NOT NULL, kind TEXT NOT NULL, pet_id TEXT, mood INTEGER, satiety INTEGER, applied INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(user_id,request_id))");
+    }
+    private static void createTaskRewards(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE task_rewards (user_id TEXT NOT NULL, source TEXT NOT NULL, pet_id TEXT NOT NULL, level INTEGER NOT NULL, exp INTEGER NOT NULL, applied INTEGER NOT NULL DEFAULT 0, PRIMARY KEY(user_id,source))");
     }
 }

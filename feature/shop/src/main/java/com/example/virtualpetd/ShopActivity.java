@@ -26,6 +26,10 @@ public class ShopActivity extends AppCompatActivity {
         super.onCreate(saved); setContentView(R.layout.activity_shop);
         model=new ViewModelProvider(this).get(EconomyViewModel.class);
         if(saved!=null) model.filter=saved.getString("filter","All");
+        else if (isInventory()) {
+            String category = getIntent().getStringExtra("inventory_category");
+            if ("Food".equals(category) || "Clothes".equals(category)) model.filter = category;
+        }
         ((TextView)findViewById(R.id.pageTitle)).setText(isInventory()?R.string.shop_inventory_title:R.string.shop_title);
         ((TextView)findViewById(R.id.heroTitle)).setText(isInventory()?R.string.shop_bag_hero:R.string.shop_hero_title);
         ((TextView)findViewById(R.id.heroSubtitle)).setText(isInventory()?R.string.shop_bag_subtitle:R.string.shop_hero_subtitle);
@@ -57,6 +61,24 @@ public class ShopActivity extends AppCompatActivity {
         });
         findViewById(R.id.demoReward).setOnClickListener(v->model.demoReward());
         model.state().observe(this,state->{ current=state; render(); });
+        model.interactionResult().observe(this, outcome -> {
+            if (outcome == null) return;
+            model.consumeInteractionResult();
+            int message;
+            switch (outcome.status) {
+                case SUCCESS: message = outcome.food ? R.string.shop_feed_success : R.string.shop_dress_success; break;
+                case FULL: message = R.string.shop_pet_full; break;
+                case NO_STOCK: message = R.string.shop_no_stock; break;
+                case ALREADY_EQUIPPED: message = R.string.shop_equipped; break;
+                case PENDING: message = R.string.shop_interaction_pending; break;
+                default: message = R.string.shop_interaction_error;
+            }
+            Snackbar bar = Snackbar.make(findViewById(R.id.shopRoot), message, Snackbar.LENGTH_LONG);
+            if (outcome.status == com.example.pet.core.model.pet.PetInteractions.Status.SUCCESS
+                    && getApplication() instanceof com.example.virtualpetd.service.PetInteractionNavigation)
+                bar.setAction(R.string.shop_view_pet, v -> ((com.example.virtualpetd.service.PetInteractionNavigation)getApplication()).openPet(this, outcome.itemId, outcome.food));
+            bar.show();
+        });
         model.result().observe(this,result->{
             if(result==null)return;
             model.consumeResult();
@@ -136,8 +158,17 @@ public class ShopActivity extends AppCompatActivity {
             MaterialButton action=card.findViewById(R.id.productAction);
             boolean uniqueOwned=owned!=null && "Clothes".equals(item.getType());
             if(isInventory()) {
-                action.setText("Food".equals(item.getType())?R.string.shop_feed:R.string.shop_dress);
-                action.setOnClickListener(v->Snackbar.make(findViewById(R.id.shopRoot),R.string.shop_integration_pending,Snackbar.LENGTH_LONG).show());
+                action.setText(owned.isEquipped() ? R.string.shop_equipped : "Food".equals(item.getType())?R.string.shop_feed:R.string.shop_dress);
+                action.setEnabled(current.loaded && !current.failed && !current.busy && !owned.isEquipped() && model.supportsInteraction());
+                if ("Food".equals(item.getType()) && model.supportsInteraction()) {
+                    int[] effect = model.foodEffect(item.getId());
+                    ((TextView)card.findViewById(R.id.productDescription)).setText(getString(R.string.shop_food_effect, effect[1], effect[0]));
+                }
+                action.setOnClickListener(v -> new MaterialAlertDialogBuilder(this)
+                    .setTitle("Food".equals(item.getType()) ? R.string.shop_feed : R.string.shop_dress)
+                    .setMessage(getString("Food".equals(item.getType()) ? R.string.shop_feed_confirm : R.string.shop_dress_confirm, item.getName()))
+                    .setNegativeButton(R.string.shop_cancel, null)
+                    .setPositiveButton(R.string.shop_use_confirm, (dialog, which) -> model.useItem(item.getId())).show());
             } else {
                 // Locked and unaffordable products remain inspectable.
                 action.setText(uniqueOwned ? getString(R.string.shop_owned_detail)

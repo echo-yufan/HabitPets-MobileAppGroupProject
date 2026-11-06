@@ -1,0 +1,16 @@
+plugins { id 'com.android.library' }
+android {
+    namespace 'com.example.pet.feature.interaction'
+    compileSdk 33
+    defaultConfig { minSdk 33; testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner' }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_1_8; targetCompatibility JavaVersion.VERSION_1_8 }
+}
+dependencies {
+    implementation project(':core:model')
+    implementation project(':core:data')
+    implementation project(':feature:pet')
+    implementation project(':feature:shop')
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:runner:1.4.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+}

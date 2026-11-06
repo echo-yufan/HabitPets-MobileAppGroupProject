@@ -67,13 +67,16 @@ public final class ShopService {
         if (total > Integer.MAX_VALUE) return PurchaseResult.INVALID_QUANTITY;
         if(requestId==null || requestId.trim().isEmpty()) return PurchaseResult.INVALID_REQUEST;
         try {
+            // Resolve host pet state before taking SQLite's write lock. E's recovery can write
+            // this same database; the inverse lock order would deadlock purchases and feeding.
+            int purchaseLevel = getPetLevel();
             SQLiteDatabase db=helper.getWritableDatabase(); db.beginTransaction();
             try {
                 try(Cursor c=db.rawQuery("SELECT item_id,quantity FROM purchases WHERE user_id=? AND request_id=?",new String[]{userId,requestId})) {
                     if(c.moveToFirst()) return (itemId.equals(c.getString(0)) && c.getInt(1)==count) ? PurchaseResult.SUCCESS : PurchaseResult.INVALID_REQUEST;
                 }
                 // Never trust the level used by the UI when the detail sheet was opened.
-                if (getPetLevel() < item.getRequiredLevel()) return PurchaseResult.LEVEL_LOCKED;
+                if (purchaseLevel < item.getRequiredLevel()) return PurchaseResult.LEVEL_LOCKED;
                 int quantity=0;
                 try(Cursor c=db.rawQuery("SELECT quantity FROM inventory WHERE user_id=? AND item_id=?",new String[]{userId,itemId})) {
                     if(c.moveToFirst()) quantity=c.getInt(0);

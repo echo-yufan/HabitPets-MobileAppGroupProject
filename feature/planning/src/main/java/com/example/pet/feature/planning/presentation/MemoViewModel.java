@@ -69,14 +69,16 @@ public final class MemoViewModel extends ViewModel {
     }
 
     public boolean setCompleted(long id, boolean completed) {
-        return submit(() -> {
-            repository.setCompleted(id, completed);
+        return submitWithMessage(() -> {
+            com.example.pet.core.model.task.TaskCompletionReward reward = repository.setCompletedWithReward(id, completed);
             if (completed) reminders.cancel(id);
             else {
                 Task latest = repository.getTask(id);
                 if (latest != null && latest.reminderAt != null) reminders.schedule(latest);
             }
-        }, currentFilter(), null);
+            if (!completed) return "已取消完成；再次勾选不会重复领取奖励";
+            return reward == null ? "任务已完成" : "完成！金币 +" + reward.coins + "，经验 +" + reward.exp;
+        }, currentFilter());
     }
 
     public boolean editTask(long id, String name, Long deadline, Long reminderAt) {
@@ -107,6 +109,10 @@ public final class MemoViewModel extends ViewModel {
     private int currentFilter() { return state.getValue().filter; }
 
     private boolean submit(Runnable command, int filter, String successMessage) {
+        return submitWithMessage(() -> { command.run(); return successMessage; }, filter);
+    }
+
+    private boolean submitWithMessage(java.util.function.Supplier<String> command, int filter) {
         MemoUiState previous = state.getValue();
         if (cleared || previous.busy) return false;
         long requestId = ++operationId;
@@ -114,10 +120,10 @@ public final class MemoViewModel extends ViewModel {
         try {
             disk.execute(() -> {
                 MemoUiState result;
-                String message = successMessage;
+                String message = null;
                 boolean commandCompleted = false;
                 try {
-                    command.run();
+                    message = command.get();
                     commandCompleted = true;
                     // Read after the write completes, keeping list and count in one result.
                     List<Task> tasks = repository.getTasks(filter);

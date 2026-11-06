@@ -17,9 +17,9 @@ public final class ChatUIRenderer {
 
     public void render(ChatState state) {
         StringBuilder text = new StringBuilder();
-        if (state.messages.isEmpty()) text.append("宠物: 你好呀！我是你的虚拟宠物，快来和我聊天吧～\n\n");
+        if (state.messages.isEmpty()) text.append("牛来: 你好呀！我是牛来，今天有什么想和我分享的吗？\n\n");
         for (ChatMessage message : state.messages) {
-            text.append("user".equals(message.role) ? "你: " : "宠物: ")
+            text.append("user".equals(message.role) ? "你: " : "牛来: ")
                     .append(message.content).append('\n');
             if (message.status == ChatMessage.Status.SENDING) text.append("（正在思考中…）\n");
             if (message.status == ChatMessage.Status.FAILED) text.append("（发送失败：")

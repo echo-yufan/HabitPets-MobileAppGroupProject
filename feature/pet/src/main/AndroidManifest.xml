@@ -2,6 +2,7 @@
     <application>
         <activity
             android:name="com.example.pet.feature.pet.ui.PetActivity"
+            android:theme="@style/Theme.HabitPets.Pet"
             android:label="@string/pet_name"
             android:exported="false" />
     </application>

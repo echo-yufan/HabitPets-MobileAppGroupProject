@@ -48,7 +48,7 @@ public class NotificationNavigationInstrumentedTest {
 
     @Test public void arrowFromHomeReturnsToExistingHome() throws Exception {
         startHome();
-        onView(withId(com.example.pet.R.id.imageButton5)).perform(click());
+        onView(withId(com.example.pet.feature.pet.R.id.pet_tasks_button)).perform(androidx.test.espresso.action.ViewActions.scrollTo(),click());
         awaitActivity(MemoActivity.class);
         onView(withId(com.example.pet.feature.planning.R.id.ib_back)).perform(click());
         awaitActivity(MainActivity.class);
@@ -57,7 +57,7 @@ public class NotificationNavigationInstrumentedTest {
 
     @Test public void systemBackFromHomeReturnsToExistingHome() throws Exception {
         startHome();
-        onView(withId(com.example.pet.R.id.imageButton5)).perform(click());
+        onView(withId(com.example.pet.feature.pet.R.id.pet_tasks_button)).perform(androidx.test.espresso.action.ViewActions.scrollTo(),click());
         awaitActivity(MemoActivity.class);
         pressBack();
         awaitActivity(MainActivity.class);
@@ -86,7 +86,7 @@ public class NotificationNavigationInstrumentedTest {
 
     @Test public void repeatedNotificationClicksDoNotAccumulatePages() throws Exception {
         startHome();
-        onView(withId(com.example.pet.R.id.imageButton5)).perform(click());
+        onView(withId(com.example.pet.feature.pet.R.id.pet_tasks_button)).perform(androidx.test.espresso.action.ViewActions.scrollTo(),click());
         awaitActivity(MemoActivity.class);
         clickNotification("NavigationRepeatFirst");
         awaitActivity(MemoActivity.class);

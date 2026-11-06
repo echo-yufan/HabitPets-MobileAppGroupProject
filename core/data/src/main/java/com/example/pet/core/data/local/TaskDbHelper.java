@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class TaskDbHelper extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "pet_planner.db";
-    public static final int DB_VERSION = 3;
+    public static final int DB_VERSION = 4;
     public static final String TABLE_TASKS = "tasks";
 
     public static final String COL_ID = "id";
@@ -27,7 +27,11 @@ public class TaskDbHelper extends SQLiteOpenHelper {
     public static final String COL_TAG = "tag";
 
     public TaskDbHelper(Context context) {
-        super(context, DB_NAME, null, DB_VERSION);
+        this(context, DB_NAME);
+    }
+
+    public TaskDbHelper(Context context, String name) {
+        super(context, name, null, DB_VERSION);
     }
 
     @Override
@@ -48,6 +52,7 @@ public class TaskDbHelper extends SQLiteOpenHelper {
                 + COL_COMPLETED_AT + " INTEGER, "
                 + COL_SOURCE + " TEXT, "
                 + COL_TAG + " TEXT)");
+        createRewardOutbox(db);
     }
 
     @Override
@@ -58,5 +63,10 @@ public class TaskDbHelper extends SQLiteOpenHelper {
         if (oldVersion < 3) {
             db.execSQL("ALTER TABLE " + TABLE_TASKS + " ADD COLUMN " + COL_TAG + " TEXT");
         }
+        if (oldVersion < 4) createRewardOutbox(db);
+    }
+
+    private static void createRewardOutbox(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE task_reward_outbox (source TEXT PRIMARY KEY, task_id INTEGER NOT NULL UNIQUE, coins INTEGER NOT NULL CHECK(coins>=0), exp INTEGER NOT NULL CHECK(exp>=0), delivered INTEGER NOT NULL DEFAULT 0)");
     }
 }
